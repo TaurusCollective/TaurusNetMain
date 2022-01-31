@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .navBtn {
+    @apply hidden h-6 md:inline-flex cursor-pointer hover:scale-125 transition-all duration-150 ease-out;
+  }
+
+  .btn {
+    @apply h-7 hover:scale-125 cursor-pointer transition-all duration-150 ease-out;
+  }
+
+  .postImage {
+    max-height: 567px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .imagePopup,
+  .ant-image-preview-img {
+    display: inline-block !important;
+  }
+
+  .ImgStorProfheight {
+    height: 3.5rem !important;
+    width: 3.5rem !important;
+  }
+
+  .myAntImageMaskNone,
+  .ant-image-mask {
+    display: none !important;
+  }
+
+  .paddingHeader {
+    padding: 1.25rem;
+  }
+  .paddingButtonsPost {
+    padding: 1rem;
+  }
+
+  .paddingComments {
+    padding: 1.25rem;
+  }
+  .paddingInputComment {
+    padding: 1rem;
+  }
+  .postButtons {
+    height: 2.25rem;
+  }
+  .roundedBorder {
+    border-radius: 25px !important;
+  }
+  .profilePageProfileImage {
+    display: inline-block;
+  }
+  .profileImageDiv {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .basicUserInfoDiv {
+    display: inline-block;
+    width: 80%;
+    padding-top: 6px;
+    padding-left: 3%;
+  }
+  .basicUserInfoDiv > p {
+    display: inline-block;
+  }
+  .userName {
+    width: 90%;
+  }
+  .userEmail {
+    width: 90%;
+  }
+  .userBioP {
+    margin-top: 20px;
+  }
+  .saveDivOnEdit {
+    display: inline-block;
+    width: 49%;
+    margin-top: 20px;
+  }
+
+  .predictionsContainer {
+    width: 371px;
+    margin-left: 327px;
+    border: 1px solid rgba(96, 165, 250);
+    padding: 5px;
+    padding-left: 37px;
+    border-radius: 10px;
+  }
+  .predictionsContainer:hover {
+    color: rgba(96, 165, 250);
+  }
+  .followUnfollowButton {
+    width: fit-content;
+    display: inline-block;
+    margin-top: 5px;
+  }
+  .followersAmount {
+    margin-left: 20px;
+  }
+  .categoriesSidebar {
+    margin-left: 2.5rem;
+    margin-top: 3.5rem;
+  }
+  .noPostsBeFirstDiv {
+    text-align: center;
+    margin-top: 50px;
+    font-weight: bold;
+  }
+  .myNftsButton {
+    margin-top: 20px;
+  }
+}

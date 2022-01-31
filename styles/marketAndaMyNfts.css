@@ -1,0 +1,110 @@
+.bg-dark {
+  background: rgb(18, 18, 18) !important;
+}
+
+.bg-moralis {
+  background: #b7e803 !important;
+}
+.text-moralis {
+  color: #b7e803 !important;
+}
+.border-moralis {
+  border-color: #b7e803 !important;
+}
+.btn-moralis {
+  color: #f2f2f2 !important;
+  background: #b7e803 !important;
+}
+.btn-moralis:hover {
+  color: #f2f2f2 !important;
+  background: #729103 !important;
+}
+
+.btn-outline-moralis {
+  color: #b7e803 !important;
+  border: 1px solid #b7e803 !important;
+}
+.btn-outline-moralis:hover {
+  color: #f2f2f2 !important;
+  background: #729103 !important;
+}
+
+.btn-primary {
+  background: #0c2e75 !important;
+  border-color: #0c2e75 !important;
+  color: #f2f2f2;
+}
+.btn-primary:hover {
+  background: #082151 !important;
+  border-color: #082151 !important;
+  color: #f2f2f2;
+}
+
+.card {
+  border-radius: 0.6rem !important;
+}
+
+.border-light {
+  /* border-color: rgb(61, 61, 61) !important; */
+  border: 2px solid #d3f1ff !important;
+}
+.modal-header {
+  border-bottom: 3px solid #d3f1ff !important; /*#e6f7ff*/
+}
+.modal-content {
+  border: 5px solid #d3f1ff !important;
+}
+
+.btn.btn-outline-secondary {
+  height: fit-content;
+}
+
+.card {
+  padding: 5px;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.cardImageWrapper {
+  height: 250px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.card-text {
+  height: 60px;
+  margin-bottom: 15px;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.card-text::-webkit-scrollbar {
+  display: none;
+}
+
+.card-img-top {
+  max-height: 100%;
+  width: auto !important;
+  margin-left: auto;
+  margin-right: auto;
+
+  align-self: center;
+  flex: 0 0 auto;
+}
+
+.btnBuyOnMarket {
+  height: 50px;
+}
+
+.card-header {
+  background-color: transparent;
+  border-bottom: 1px solid rgb(116, 237, 253);
+}
+
+.myModalTitle {
+  font-size: 20px;
+}
