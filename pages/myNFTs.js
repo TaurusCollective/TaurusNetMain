@@ -13,10 +13,8 @@ const MyNfts = () => {
   const [isAvax, setIsAvax] = useState(true);
   useEffect(() => {
       if(chainId == 0xa869){ // Avalanche testnet
-          console.log("Tu pravi da je avax")
           setIsAvax(true);
       }else if(chainId == 0x61){      // BSC testnet
-          console.log("Tu pravi da je bsc")
           setIsAvax(false)
       }
   }, [chainId]);
@@ -30,10 +28,8 @@ const MyNfts = () => {
     const EnableWeb3 = async () => {
   
         if(isWeb3Enabled){
-            console.log("JEEEEJJJJEEEE");
           return null
         }else{
-            console.log("NIIIII");
             enableWeb3()
         }
       
@@ -78,7 +74,6 @@ const MyNfts = () => {
   const initTemplate = (id) => {
     const template = document.getElementById(id);
     setTimeout(function () {
-        console.log("template :: ",template);
         //template.id = "";
         if(template.parentNode)
             template.parentNode.removeChild(template);
@@ -86,12 +81,8 @@ const MyNfts = () => {
     return template;
   }
 
-  // userItemTemplate = initTemplate("itemTemplate");
-  // userItems = document.getElementById("userItemsList");
-  // console.log("userItemsSS : ",userItems)
 
   function fixURL(url){
-    console.log("This is url : ", url)
     if(url){
       if(url.startsWith("ipfs://")){
         return "https://ipfs.moralis.io:2053/ipfs/"+ url.split("ipfs://").slice(-1);
@@ -104,7 +95,6 @@ const MyNfts = () => {
 
   const getAndRenderItemData = (item, renderFunction) => {
     let lolUlr;
-    console.log("item.tokenUri : ", item.tokenUri)
     if(item.tokenUri.length > 0){
       lolUlr = fixURL(item.tokenUri);
     }else{
@@ -113,7 +103,6 @@ const MyNfts = () => {
     fetch(lolUlr)
         .then(response => response.json())
             .then(data => {
-                console.log("Her Data: ",data);
                 if(data.name){
                   item.name = data.name;
                   item.description = data.description;
@@ -139,8 +128,6 @@ const MyNfts = () => {
     } else {
       ownedItems = await Moralis.Cloud.run("getUserItems");
     }
-    //const ownedItems = await Moralis.Cloud.run("getUserItems");
-    console.log('tu loadUserItems: ', ownedItems);
     ownedItems.forEach(item => {
         const userItemListing = document.getElementById(`user-item-${item.tokenObjectId}`);
         if (userItemListing) {
@@ -159,7 +146,6 @@ const MyNfts = () => {
     if (userItemListing) {
         return;
     }
-    console.log("item : ",item);
 
     const userItem = userItemTemplate.cloneNode(true);    // you get the whole div and what is inside it
     userItem.getElementsByTagName("img")[0].src = item.image;
@@ -172,101 +158,38 @@ const MyNfts = () => {
 
     userItem.getElementsByTagName("button")[0].disabled = item.askingPrice > 0;
     userItem.getElementsByTagName("button")[0].onclick = async () => {
-        console.log("SEM tu");
        // user = await Moralis.User.current();
         if (!user){
-            console.log("SEM tu2");
          //   login();
             return;
         }
-        console.log("SEM tu3");
         await ensureMarketplaceIsApproved(item.tokenId, item.tokenAddress);
-        console.log("SEM tu4");
-        console.log("item.tokenId: ", item.tokenId, "item.tokenAddress: ", item.tokenAddress, "value: ", userItem.getElementsByTagName("input")[0].value );
-        // if (isWeb3Enabled){
-            await marketplaceContract.methods.addItemToMarket(item.tokenId, item.tokenAddress, userItem.getElementsByTagName("input")[0].value).send({from: user.get('ethAddress') });
-            console.log("SEM tu4.5");
-        // }else{
-        //     console.log("Ni hoto not... addItemToMarket...");
-        // }
-        
-        console.log("SEM tu5");
+   
+        await marketplaceContract.methods.addItemToMarket(item.tokenId, item.tokenAddress, userItem.getElementsByTagName("input")[0].value).send({from: user.get('ethAddress') });
+   
 
     };
     // const userItems = document.getElementById("userItemsList");
 
     userItem.id = `user-item-${item.tokenObjectId}`
     userItems.appendChild(userItem);
-    //console.log("userItems :: " , userItems);
    
 }
 
 const ensureMarketplaceIsApproved = async (tokenId, tokenAddress) => {
-  console.log("LOL1");
   const userAddress = user.get('ethAddress');
   const contract = new web3.eth.Contract(tokenContractAbiE, tokenAddress);
-  console.log("LOL2");
+ 
   
-  //if (isWeb3Enabled){
       const approvedAddress = await contract.methods.getApproved(tokenId).call({from: userAddress});
-      console.log("LOL3");
+
       if(approvedAddress != MARKETPLACE_CONTRACT_ADDRESS){
-          console.log("LOL4");
+
           await contract.methods.approve(MARKETPLACE_CONTRACT_ADDRESS, tokenId).send({from: userAddress});
-          console.log("LOL5");
+
       }
-  // }else{
-  //     console.log("Ni hoto not... getApproved...");
-  // }
+ 
 }
-
-
-// setTimeout(function () {
-  
-//   userItemTemplate = initTemplate("itemTemplate");
-//   userItems = document.getElementById("userItemsList");
-//   console.log("userItemsSS : ",userItems)
-//   loadUserItems();
-// }, 1000);
-
-
-
-
-
-
-
-
-
-
-// useEffect( () => {
-//   const EnableWeb3 = async ({user}) => {
-
-//       if(isWeb3Enabled){
-//           console.log("JEEEEJJJJEEEE");
-//         return null
-//       }else{
-//           console.log("NIIIII");
-//           enableWeb3()
-//       }
-    
-     
-//   }
-//   EnableWeb3(user);
-
-//   setTimeout(function () {
-
-//     userItemTemplate = initTemplate("itemTemplate");
-//     userItems = document.getElementById("userItemsList");
-  
-//     loadUserItems();
-//   }, 5000);
-    
-// }, [ Moralis,isWeb3Enabled,enableWeb3, user ])
-
-
-
-
-
 
 
 
@@ -331,130 +254,6 @@ return (
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // const [value, setValue] = useState([]);
-  // const [total, setTotal] = useState(null);
-  // const [isLoading, setIsLoading] = useState(false);
-  // const {isAuthenticated, Moralis} = useMoralis();
-
-  // async function getMyNFTS(){
-  //   // const options = { chain: 'bsc testnet', address: '0x2d5a827d1E7aFF5C83AFD6F28574A1f851def097' };
-  //   // const NFTs = await Moralis.Web3.getNFTs(options);
-  //   // const myNFTs = await Moralis.Web3.getNFTs({ chain: 'rinkeby', address: '0x05baa52f8e07005e519c39519cf78593688c1baa'});
-
-  //    const myNFTs = await Moralis.Web3.getNFTs({ chain: 'bsc testnet'});
-  //   //const myNFTs = await Moralis.Web3API.account.getNFTs({ chain: 'bsc testnet'});
-  //   console.log("LOL: ", myNFTs);
-
-  //   myNFTs.forEach(function(nft){
-  //     let url = fixURL(nft.token_uri)
-
-
-  //      getMyNFTS2(url);
-
-  //   })
-  // }
-
-
-  
-
-  // function fixURL(url){
-  //   if(url.startsWith("https://gateway.ipfs.io/ipns/")){
-  //     console.log("Sem tu 1");
-  //     return "https://ipfs.moralis.io:2053/ipfs/"+ url.split("https://gateway.ipfs.io/ipns/").slice(-1);
-  //   }
-  //   else if(url.startsWith("ipfs")){
-  //     console.log("Sem tu 2");
-  //     return "https://ipfs.moralis.io:2053/ipfs/"+ url.split("ipfs://").slice(-1);
-  //   } 
-  //   else if(url.startsWith("https://ipfs.io/ipfs/")){
-  //     console.log("Sem tu 3");
-  //     return "https://ipfs.moralis.io:2053/ipfs/"+ url.split("https://ipfs.io/ipfs/").slice(-1);
-  //   }  
-  //   else{
-  //     console.log("Sem tu 4");
-  //     return url+"?format=json"
-  //   }
-  // }
-
-  // async function getMyNFTS2(url){
-  //   const params = {
-  //       theUrl: url
-  //   }
-  //   console.log("Now I'm trying: "+ url + " with params: "+ params.theUrl);
-  //   // const metadata = await Moralis.Cloud.run("fetchJSON", params);
-  //   await Moralis.Cloud.run("fetchJSON", params)
-  //   .then(metadata =>{
-  //     console.log("TUUUUUU");
-  //     console.log(metadata);
-  //     console.log("from url: "+ params.theUrl);
-
-  //     $("#content").html($("#content").html()+"<h2>"+metadata.data.name+"</h2>");
-  //     $("#content").html($("#content").html()+"<h3>"+metadata.data.description+"</h3>");
-  //     $("#content").html($("#content").html()+ "<img width=50 height=50 src='"+fixURL(metadata.data.image)+"'>");
-
-  //   })
-  //   .catch(err => console.log("Error: "+err)) 
-
-
-  // }
-
-
-
-  // useEffect( () => {
-  //   if (isAuthenticated) {
-  //     getMyNFTS();  //this one is depricated, but the one bellow, doesn't work...
-
-    
-  //       // setIsLoading(true);
-  //       // Moralis.Web3API.account.getNFTs()
-  //       //     .then(data => {
-  //       //         console.log(data);
-  //       //         // let gear = data.result.filter(data => data.symbol === "GEAR")
-  //       //         // setValue(gear);
-  //       //         // setTotal(gear.length);
-  //       //          setIsLoading(false);
-  //       //     });
-  //   }
-  // }, [isAuthenticated, Moralis])
-
-
-
-
-
-
-  //   return (
-  //     <div>
-  //       <Box>MyNFTs Page</Box>
-  //       <div id="content"></div>
-  //     </div>
-  //   );
 }
 
 export default MyNfts;

@@ -38,7 +38,6 @@ function MoralisDappProvider({ children }) {
   useEffect(() => {
     Moralis.onChainChanged(function (chain) {
       setChainId(chain);
-      console.log("sem tuuuu", chain);
       if(chain == 0xa869){
         setContractAddress("0x7C8207a4632Bc31283a789F92764A8b20467d924") //posts decentraPosts Avalanche testnet
         setContractUserAddress("0x9614C39Bda6D0a315cAeAb0d6a116abdaF71e0Ee") //user decentraUser for Avalanche testnet
@@ -73,7 +72,6 @@ function MoralisDappProvider({ children }) {
       setContractMarketplaceAddress("0xb2BED9E95562A878a9c59ad7675fE375C6E9e862")  //marketplace for BSC testnet
     }
 
-    console.log("sem tuuuu2 contractAddress: ", contractAddress );
   }, [chainId]);
   
 

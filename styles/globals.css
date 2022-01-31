@@ -113,4 +113,11 @@
   .myNftsButton {
     margin-top: 20px;
   }
+  .maxWidth100 {
+    max-width: 100%;
+  }
+  .customSubmitButton {
+    width: 100%;
+    padding-bottom: 31px;
+  }
 }

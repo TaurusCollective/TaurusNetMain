@@ -23,11 +23,11 @@ function FeedAvax() {
     // const [fetchedCategories, setFetchedCategories] = useState([]);
     // useEffect(() => {
     //     if(chainId == 0xa869){ // Avalanche testnet
-    //         console.log("Tu pravi da je avax")
+    //      
     //         const queryCategories = useMoralisQuery("CategoriesAVAX");
     //         fetchedCategories = JSON.parse(JSON.stringify(queryCategories.data, ["categoryId", "category"]));
     //     }else if(chainId == 0x61){      // BSC testnet
-    //         console.log("Tu pravi da je bsc")
+    //      
     //         const queryCategories = useMoralisQuery("Categories");
     //         fetchedCategories = JSON.parse(JSON.stringify(queryCategories.data, ["categoryId", "category"]));
     //     }
@@ -40,7 +40,7 @@ function FeedAvax() {
     const { selectedCategory } = useMoralisDapp();
     const [isCategorySelected, setIsCategorySelected] = useState(false);
 
-    console.log("selectedCategory : ", selectedCategory)
+   
     useEffect(() => {
         if(selectedCategory.category == "default"){
             setIsCategorySelected(false);

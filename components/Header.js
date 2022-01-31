@@ -23,9 +23,7 @@ function Header() {
     const [predictions, setPredictions] = useState([])
 
     const { data, error, isLoading } =  useMoralisCloudFunction("GetUsers");
-    // if(data){
-    //     console.log("TUU : ", data.users);
-    // }
+  
     
     const getRecommended = async (value) => {
         return data.users.filter(item => { return item.attributes.username.toLowerCase().indexOf(value.toLowerCase()) !== -1 || item.attributes.ethAddress.toLowerCase().indexOf(value.toLowerCase()) !== -1});

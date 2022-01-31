@@ -15,7 +15,7 @@ import VotesAvax from "./VotesAvax";
 
 const PostAvax = ({post}) => {
 
-    //console.log("POST : ", post)
+
 
     const { contentId, postId, postOwner,  updatedAt, commentList } = post;
     const [postContent, setPosContent] = useState({ title: "default", content: "default" });
@@ -55,12 +55,12 @@ const PostAvax = ({post}) => {
     useEffect(() => {
         function extractUri(data) {
           const fetchedContent = JSON.parse(JSON.stringify(data, ["contentUri"]));
-          //console.log("fetchedContent1 : ", fetchedContent);
+    
           const contentUri = fetchedContent[0]["contentUri"];
           return contentUri;
         }
         async function fetchIPFSDoc(ipfsHash) {
-          //console.log(ipfsHash);
+    
           const url = ipfsHash;
           const response = await fetch(url);
           return await response.json();
@@ -70,7 +70,7 @@ const PostAvax = ({post}) => {
           setPosContent(content);
         }
         if (data.length > 0) {
-          //console.log("DATTTTAAAA1 : ", data)
+     
           processContent();
         }
     }, [data]);
@@ -81,9 +81,9 @@ const PostAvax = ({post}) => {
 
         async function getPostVoteStatus() {
             const fetchedVotes = JSON.parse(JSON.stringify(votes));
-            //console.log("fetchedVotes : ", fetchedVotes)
+       
             fetchedVotes.forEach(({ voter, up }) => {
-              //console.log("voter : ", voter)
+          
 
               if (voter === walletAddress) setHasLiked(up ? true : false);//setVoteStatus(up ? "liked" : "disliked");
             });
@@ -95,20 +95,12 @@ const PostAvax = ({post}) => {
 
 
     const sendComment = async (e) => {
-      //console.log("sem tu 1")
+  
       e.preventDefault();
-      //console.log("sem tu 2")
+    
 
       const commentToSend = comment;
       setComment('');
-
-      // await addDoc(collection(db, 'posts', id, 'comments'), {
-      //     comment: commentToSend,
-      //     username: session.user.username,
-      //     userImage: session.user.image,
-      //     timestamp: serverTimestamp(),
-      // });
-
       
       addPostComment(commentToSend);
     }
@@ -120,7 +112,7 @@ const PostAvax = ({post}) => {
          { base64: btoa(unescape(encodeURIComponent(JSON.stringify(content)))) },
           { saveIPFS: true}
       )
-      //console.log(ipfsResult._ipfs)
+
       return ipfsResult._ipfs;
     }
 
@@ -128,7 +120,6 @@ const PostAvax = ({post}) => {
     async function addPostComment(post) {
       const contentUri = await processCommentContent(post); 
       const categoryId = selectedCategory["categoryId"];
-      // console.log('parentId : ', postId);
       
 
       const options = {
@@ -143,7 +134,6 @@ const PostAvax = ({post}) => {
           }
       await contractProcessor.fetch({params:options,
           onSuccess: () => message.success("success"),
-          // onError: (error) => message.error(error),
           onError: (error) => console.log(error),
       });
     }
@@ -175,14 +165,11 @@ const PostAvax = ({post}) => {
 
     const likePost = async () => {
       if(hasLiked){
-          // await deleteDoc(doc(db, 'posts', id, 'likes', session.user.uid));
           setHasLiked(false);
           vote("voteDown");
           
       }else{
-          // await setDoc(doc(db, 'posts', id, 'likes', session.user.uid), {
-          //     username: session.user.username,
-          // })
+
           setHasLiked(true);
           vote("voteUp");
       }

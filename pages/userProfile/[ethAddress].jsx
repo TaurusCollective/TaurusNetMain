@@ -24,10 +24,8 @@ const userProfile = ({ethAddress}) => {
     const [isAvax, setIsAvax] = useState(true);
     useEffect(() => {
         if(chainId == 0xa869){ // Avalanche testnet
-            console.log("Tu pravi da je avax")
             setIsAvax(true);
         }else if(chainId == 0x61){      // BSC testnet
-            console.log("Tu pravi da je bsc")
             setIsAvax(false)
         }
     }, [chainId]);
@@ -37,7 +35,6 @@ const userProfile = ({ethAddress}) => {
             ethAddress: ethAddress,
         });
         if(data){
-            //console.log("datadatadata : ", data[0]);
             setUserProfileData(data[0]);
             setUserBio(userProfileData?.userBio)
         }
@@ -51,8 +48,6 @@ const userProfile = ({ethAddress}) => {
             
         });
         if(data2){
-            console.log("TTTTTTTEEEEEEEEEEUUUUUUUUU")
-            console.log("datadatadata2 : ", data2.doesItAlreadyExist);
             setIsFollowing(data2.doesItAlreadyExist);
             //setUserProfileData(data2);
         }
@@ -62,67 +57,36 @@ const userProfile = ({ethAddress}) => {
     useEffect(() => {
         if(userProfileData){
             setFollowersAmmount(userProfileData.Followers?.length);
-            console.log("tu: ",userProfileData);
             const postsList = userProfileData.postList;
-            console.log("His post list: ", postsList);
             setUserPostsList(postsList)
-            // postsList.forEach(postInList => {
-            //     const { postList } = postInList;
-            //     console.log(postInList)
-            //     console.log(postList)
-            //     setUserPostsList(postList);
-            //     postList.forEach(element => {
-            //         console.log(element)
-            //     });
-            // });
         }
     }, [userProfileData])
 
     //
 
-    
-
-    // if(followUserState){
-    //     if(isFollowing){
-    //         isFollowing = false;
-    //         followersAmmount =- 1;
-    //     }else{
-    //         isFollowing = true;
-    //         followersAmmount =+ 1;
-    //     }
-
-    // }
+   
 
     useEffect(() => {
         if(followUserState){
             if(isFollowing){
             // isFollowing = false;
-            //console.log("isFollowing11 : ", isFollowing)
             //   setTimeout(function() {
                    setIsFollowing(false);
             //   }, 6000);
-              //  console.log("isFollowing12 : ", isFollowing)
-                console.log("sem tu 1");
                 setFollowersAmmount(userProfileData?.Followers?.length - 1);
                 //followersAmmount =- 1;
             }else{
                 //isFollowing = true;
-             //   console.log("isFollowing21 : ", isFollowing)
              //  setTimeout(function() {
                    setIsFollowing(true);
             //   }, 6000);
-              //  console.log("isFollowing12 : ", isFollowing)
-                console.log("sem tu 2");
                 setFollowersAmmount(userProfileData?.Followers?.length + 1);
                 //followersAmmount =+ 1;
             }
         }
     }, [followUserState])
 
-   // console.log("isFollowingisFollowing : ", isFollowing)
-
-   console.log("isFollowing : ", isFollowing)
-   console.log("userProfileData : ", userProfileData?.userBio)
+ 
 
     return (
         <div className="bg-gray-50 h-screen overflow-y-scroll scrollbar-hide">

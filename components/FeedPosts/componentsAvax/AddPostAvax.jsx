@@ -4,8 +4,9 @@ import {useWeb3ExecuteFunction} from "react-moralis";
 import {useState, useRef} from "react";
 import {message} from "antd";
 import { CameraIcon } from "@heroicons/react/outline";
+import { Modal, Button } from 'antd';
 
-const AddPostAvax = () => {
+const AddPostAvax = ({showAddPost, sendDataToParent }) => {
     const {contractABI, contractAddress, selectedCategory} = useMoralisDapp();
     const contractABIJson = JSON.parse(contractABI);
     const ipfsProcessor = useMoralisFile();
@@ -16,6 +17,23 @@ const AddPostAvax = () => {
     const filePickerRef = useRef(null);
     const [photoFile, setPhotoFile] = useState();
     const [parentId, setParentId] = useState("0x91")
+    const [isModalVisible, setIsModalVisible] = useState(true);
+
+
+
+    const showModal = () => {
+        setIsModalVisible(true);
+      };
+    
+      const handleOk = () => {
+        //setIsModalVisible(false);
+        sendDataToParent(false)
+      };
+    
+      const handleCancel = () => {
+        //setIsModalVisible(false);
+        sendDataToParent(false)
+      };
     
     async function addPost(post) {
         const contentUri = await processContent(post); 
@@ -55,9 +73,9 @@ const AddPostAvax = () => {
     const processContent = async (content) => {
         // Save file input to IPFS
         const data = content.photoFile;
-       console.log(data);
-       console.log('photoFile : ', photoFile);
-       console.log('ipfsProcessor : ', ipfsProcessor);
+    //    console.log(data);
+    //    console.log('photoFile : ', photoFile);
+    //    console.log('ipfsProcessor : ', ipfsProcessor);
 
         const ipfsImage = await myFunctionThatCatches(data);
 
@@ -66,8 +84,6 @@ const AddPostAvax = () => {
             return;
         }
 
-        console.log("ipfsImage : ", ipfsImage);
-        console.log("ipfsImage._ipfs : ", ipfsImage._ipfs)
 
         content.photoFile = ipfsImage._ipfs;
 
@@ -76,7 +92,6 @@ const AddPostAvax = () => {
             { base64: btoa(JSON.stringify(content)) },
             { saveIPFS: true}
         )
-        console.log(ipfsResult._ipfs)
         return ipfsResult._ipfs;
     }
 
@@ -115,8 +130,9 @@ const AddPostAvax = () => {
     
 
     return (
+        <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <form onSubmit={onSubmit}>
-        <div className ="row">
+        <div className ="">
             <div className="form-group">
                 <input
                 type="text"
@@ -127,7 +143,7 @@ const AddPostAvax = () => {
                 />
 
                 {selectedFile ? (
-                    <img src={selectedFile} className="w-full object-contain cursor-pointer" onClick={() => setSelectedFile(null)} alt="selected image" />
+                    <img src={selectedFile} className="object-contain cursor-pointer maxWidth100" onClick={() => setSelectedFile(null)} alt="selected image" />
                 ) : (
                     <div
                         onClick={() => filePickerRef.current.click()}
@@ -163,9 +179,10 @@ const AddPostAvax = () => {
                 onChange={(e) => setContent(e.target.value)}
                 />
             </div>
-            <button type="submit" className="btn btn-dark ">Submit</button>
+            <button type="submit" className="btn btn-dark customSubmitButton">Submit</button>
         </div>
     </form>
+    </Modal>
     )
 }
 

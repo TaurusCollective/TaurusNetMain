@@ -29,9 +29,9 @@ function Account() {
   const { walletAddress, chainId } = useMoralisDapp();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  //console.log('Tu user: ',user);
+ 
   const avatar = user?.get('avatar'); // this is a Moralis.File that is already saved to the user object
-  //console.log('Tu avatar: ',avatar);
+
 
   if (!isAuthenticated) {
     return (

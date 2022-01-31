@@ -13,7 +13,7 @@ import Comments from "./Comments";
 
 const Post = ({post}) => {
 
-    //console.log("POST : ", post)
+
 
     const { contentId, postId, postOwner,  updatedAt, commentList } = post;
     const [postContent, setPosContent] = useState({ title: "default", content: "default" });
@@ -50,55 +50,17 @@ const Post = ({post}) => {
       getPostsOwner();
 
  
-      // const [resJe, setResJe] = useState(1)
-      // let lol = [];
-      // let lol2 = [];
-      //async function getCommentsContent() {
-        // if(commentList){
-        //   commentList.forEach(commentTemp => {
-        //     const { data: commentDataI } = useMoralisQuery("Comments", (query) => query.equalTo("postId", commentTemp));
-        //     //console.log("commentTemp: ",commentDataI[0].attributes.contentId);
-        //     // console.log("commentDataI : ", commentDataI)
-        //     if(commentDataI[0]){
-        //       lol.push(commentDataI[0].attributes);
-        //     }
-            
-        //   });
-        // }
-      //}
-//console.log("commentData :::::: ", commentData);
-      //getCommentsContent();
-
-
-
-
-    //   if(lol.length >0){
-    //     console.log("lol 333 lol:", lol); 
-    //   lol.forEach((element) => {
-    //     if(element){
-    //       console.log("ELEMENT: ",element);
-    //       console.log("ELEMENT.contentId: ",element.contentId);
-    //       // const { data: ContetntDataURIComment } = useMoralisQuery("Contents", (query) => query.equalTo("contentId", element[0].attributes.contentId));
-
-    //       const { data: ContetntDataURIComment } = useMoralisQuery("Contents", (query) => query.equalTo("contentId", element.contentId));
-    //       //console.log("11111dataComment: ",ContetntDataURIComment);
-    //       lol2.push(ContetntDataURIComment);
-    //     }
-    //   });
-      
-    //   console.log("LOOOOOOLLLL2 : ", lol2);
-    // }
 
 
     useEffect(() => {
         function extractUri(data) {
           const fetchedContent = JSON.parse(JSON.stringify(data, ["contentUri"]));
-          //console.log("fetchedContent1 : ", fetchedContent);
+        
           const contentUri = fetchedContent[0]["contentUri"];
           return contentUri;
         }
         async function fetchIPFSDoc(ipfsHash) {
-          //console.log(ipfsHash);
+     
           const url = ipfsHash;
           const response = await fetch(url);
           return await response.json();
@@ -108,44 +70,21 @@ const Post = ({post}) => {
           setPosContent(content);
         }
         if (data.length > 0) {
-          //console.log("DATTTTAAAA1 : ", data)
+       
           processContent();
         }
       }, [data]);
 
-      // useEffect(() => {
-      //   function extractUri(oneCommentDataset) {
-      //     const fetchedContent = JSON.parse(JSON.stringify(oneCommentDataset, ["contentUri"]));
-      //     console.log("fetchedContent2 : ", fetchedContent);
-      //     const contentUri = fetchedContent[0]["contentUri"];
-      //     return contentUri;
-      //   }
-      //   async function fetchIPFSDoc(ipfsHash) {
-      //     console.log(ipfsHash);
-      //     const url = ipfsHash;
-      //     const response = await fetch(url);
-      //     return await response.json();
-      //   }
-      //   async function processContent(oneCommentDataset) {
-      //     const content = await fetchIPFSDoc(extractUri(oneCommentDataset));
-      //     setPosContent(content);
-      //   }
-      //   if (lol.length > 0) {
-      //     lol.forEach(oneCommentDataset => {
-      //       console.log("DATTTTAAAA2 : ", oneCommentDataset)
-      //       processContent(oneCommentDataset);
-      //     });
-      //   }
-      // }, []);
+  
     
     useEffect(() => {
         if (!votes?.length) return null;
 
         async function getPostVoteStatus() {
             const fetchedVotes = JSON.parse(JSON.stringify(votes));
-            //console.log("fetchedVotes : ", fetchedVotes)
+ 
             fetchedVotes.forEach(({ voter, up }) => {
-              //console.log("voter : ", voter)
+            
 
               if (voter === walletAddress) setHasLiked(up ? true : false);//setVoteStatus(up ? "liked" : "disliked");
             });
@@ -157,43 +96,18 @@ const Post = ({post}) => {
 
     
 
-    // async function vote(direction){
-    //     if (walletAddress.toLowerCase() === postOwner.toLowerCase()) return message.error("You cannot vote on your posts");
-    //     if (voteStatus) return message.error("Already voted");
-    //     const options = {
-    //         contractAddress: contractAddress,
-    //         functionName: direction,
-    //         abi: contractABIJson,
-    //         params: {
-    //           _postId: post["postId"],
-    //           [direction === "voteDown" ? "_reputationTaken" : "_reputationAdded"]: 1,
-    //         },
-    //       };
-    //       await contractProcessor.fetch({
-    //         params: options,
-    //         onSuccess: () => console.log("success"),
-    //         onError: (error) => console.error(error),
-    //       });
-    // }
-
 
 
 
     const sendComment = async (e) => {
-      //console.log("sem tu 1")
+  
       e.preventDefault();
-      //console.log("sem tu 2")
+  
 
       const commentToSend = comment;
       setComment('');
 
-      // await addDoc(collection(db, 'posts', id, 'comments'), {
-      //     comment: commentToSend,
-      //     username: session.user.username,
-      //     userImage: session.user.image,
-      //     timestamp: serverTimestamp(),
-      // });
-
+ 
       
       addPostComment(commentToSend);
     }
@@ -205,7 +119,7 @@ const Post = ({post}) => {
          { base64: btoa(unescape(encodeURIComponent(JSON.stringify(content)))) },
           { saveIPFS: true}
       )
-      //console.log(ipfsResult._ipfs)
+  
       return ipfsResult._ipfs;
     }
 
@@ -213,7 +127,7 @@ const Post = ({post}) => {
     async function addPostComment(post) {
       const contentUri = await processCommentContent(post); 
       const categoryId = selectedCategory["categoryId"];
-      // console.log('parentId : ', postId);
+    
       
 
       const options = {
@@ -235,26 +149,7 @@ const Post = ({post}) => {
 
 
     
-    
-    // const actions = [
-    // <Tooltip key="comment-basic-like" title="Vote Up">
-    //     <span
-    //     style={{ fontSize: "15px", display: "flex", alignItems: "center", marginRight: "16px" }}
-    //     onClick={() => vote("voteUp")}
-    //     >
-    //     {createElement(voteStatus === "liked" ? LikeFilled : LikeOutlined)} Vote Up
-    //     </span>
-    // </Tooltip>,
-    // <span style={{ fontSize: "15px" }}><Votes postId={postId}/></span>,
-    // <Tooltip key="comment-basic-dislike" title="Dislike">
-    //     <span
-    //     style={{ fontSize: "15px", display: "flex", alignItems: "center", marginLeft: "8px" }}
-    //     onClick={() => vote("voteDown")}
-    //     >
-    //     {createElement(voteStatus === "disliked" ? DislikeFilled : DislikeOutlined)} Vote Down
-    //     </span>
-    // </Tooltip>,
-    // ];  
+  
 
     async function vote(direction){
       if (walletAddress.toLowerCase() === postOwner.toLowerCase()){
@@ -280,27 +175,13 @@ const Post = ({post}) => {
 
 
 
-
-
-  // useEffect(() => onSnapshot(
-  //   collection(db,'posts', id, 'likes'),
-  //   (snapshot) => setLikes(snapshot.docs)
-  // ), [db, id]);
-
-  // useEffect(() => {
-  //   setHasLiked(likes.findIndex((like) => (like.id === session?.user?.uid)) !== -1);
-  // }, [likes])
-
     const likePost = async () => {
       if(hasLiked){
-          // await deleteDoc(doc(db, 'posts', id, 'likes', session.user.uid));
           setHasLiked(false);
           vote("voteDown");
           
       }else{
-          // await setDoc(doc(db, 'posts', id, 'likes', session.user.uid), {
-          //     username: session.user.username,
-          // })
+
           setHasLiked(true);
           vote("voteUp");
       }
@@ -308,26 +189,9 @@ const Post = ({post}) => {
 
     const loading = "";
     let result
-    // if(post["parentId"] == 0x9100000000000000000000000000000000000000000000000000000000000000){
+    
     result = (
-      //   <Comment
-      //   style={{ ...glStyles.card, padding: "0px 15px", marginBottom: "10px" }}
-      //   actions={actions}
-      //   author={<Text strong>{post["postOwner"]}</Text>}
-      //   avatar={<Avatar src={<Blockie address={post["postOwner"]} scale={4} />}></Avatar>}
-      //   content={
-      //       <>
-      //       <Text strong style={{ fontSize: "20px", color: "#333" }}>
-      //           {postContent["title"]}
-      //       </Text>
-      //       {postContent["photoFile"] &&
-      //         <img src={postContent["photoFile"]} alt="photoFile" />
-      //       }
-      //       <p style={{ fontSize: "15px", color: "#111" }}>{postContent["content"]}</p>
-      //       <Divider style={{ margin: "15px 0" }} />
-      //       </>
-      //   }
-      // />
+
 
 
       <div className="bg-white my-7 border rounded-sm">

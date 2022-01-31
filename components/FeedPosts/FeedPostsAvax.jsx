@@ -20,6 +20,9 @@ const FeedPostsAvax = () => {
     function toogleShowAddPost(){
         setShowAddPost(!showAddPost);
     }
+    const sendDataToParent = (index) => { // the callback. Use a better name
+        toogleShowAddPost();
+      };
 
     if (selectedCategory["category"] === "default") {
         result = (
@@ -48,7 +51,8 @@ const FeedPostsAvax = () => {
                     Post
                 </Button>
             </div>
-            {showAddPost ? <AddPostAvax/>:""}
+            {showAddPost ? <AddPostAvax showAddPost={showAddPost} sendDataToParent={sendDataToParent}/>:""}
+            {/* <AddPostAvax showAddPost={showAddPost}/> */}
             <PostsAvax/>
         </div>    
         )

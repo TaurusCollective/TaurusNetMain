@@ -14,7 +14,7 @@ const PostsAvax = () => {
       );
 
     const fetchedPosts = JSON.parse(JSON.stringify(queryPost.data, ["postId", "contentId", "postOwner", "parentId", "updatedAt", "commentList"])).reverse();
-    //console.log("fetchedPosts: ",fetchedPosts);
+  
     const havePosts = fetchedPosts.length > 0 ? true : false;
 
     const emptyResult = (

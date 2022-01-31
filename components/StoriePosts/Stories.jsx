@@ -14,7 +14,6 @@ function Stories() {
     
     const fetchedStories = JSON.parse(JSON.stringify(queryPost.data, ["objectId", "storyImg", "user"])).reverse();
 
-    //console.log("fetchedStories : ", fetchedStories)
 
     const havePosts = fetchedStories.length > 0 ? true : false;
 

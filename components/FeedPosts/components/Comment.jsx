@@ -6,15 +6,11 @@ import Moment from 'react-moment';
 
 function Comment({comment}) {
 
-    //console.log("ELEMENT0: ",comment.attributes.updatedAt);
-    //console.log("ELEMENT.contentId0: ",comment.contentId);
-    // const { data: ContetntDataURIComment } = useMoralisQuery("Contents", (query) => query.equalTo("contentId", element[0].attributes.contentId));
+  
 
     const { data: ContetntDataURIComment } = useMoralisQuery("Contents", (query) => query.equalTo("contentId", comment.attributes.contentId));
     const [commentContent, setCommentContent] = useState();
-    //console.log("11111dataComment: ",ContetntDataURIComment);
-    //lol2.push(ContetntDataURIComment);
-    //console.log("ContetntDataURIComment : ", ContetntDataURIComment);
+
     const [commentOwnerUsername, setCommentOwnerUsername] = useState("");
     const [commentOwnerAvatar, setCommentOwnerAvatar] = useState("");
     const postOwner = comment.attributes.postOwner;
@@ -26,7 +22,6 @@ function Comment({comment}) {
             postOwner,
         });
 
-        //console.log("datadata : ", data);
 
         if(data){
             setCommentOwnerUsername(data.username)

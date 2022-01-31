@@ -59,10 +59,8 @@ function myProfile() {
     const [isAvax, setIsAvax] = useState(true);
     useEffect(() => {
         if(chainId == 0xa869){ // Avalanche testnet
-            console.log("Tu pravi da je avax")
             setIsAvax(true);
         }else if(chainId == 0x61){      // BSC testnet
-            console.log("Tu pravi da je bsc")
             setIsAvax(false)
         }
     }, [chainId]);
@@ -73,21 +71,14 @@ function myProfile() {
 
     useEffect(() => {
         const postsList = JSON.parse(JSON.stringify(data, ["postList"])).reverse();
-        console.log("mydata : ",data)
         postsList.forEach(postInList => {
             const { postList } = postInList;
-            console.log("TUUU0 :",postInList)
-            console.log("TUUU1 :",postList)
             setUserPostsList(postList);
-            // postList.forEach(element => {
-            //     console.log(element)
-            // });
         });
     }, [data])
 
     useEffect(() => {
         if(user){
-            console.log("USER: ", user);
             setMyUsername(user.attributes.username);
             if(user.attributes.email){
                 setMyEmail(user.attributes.email);
@@ -132,12 +123,8 @@ function myProfile() {
         }
     }
 
-    //console.log("userPostsList : ", userPostsList);
-
     async function addUser(userData) {
-        console.log("userData : ",userData);
         const contentUri = await processContent(userData); 
-        console.log("contentUri ",contentUri);
         const options = {
             contractAddress: contractUserAddress,
             functionName: "createUser",
@@ -166,8 +153,6 @@ function myProfile() {
         addUser({myUsername, selectedFile, userPostsList});
     }
 
-
-   // console.log("userPostsList : ", userPostsList)
     return (
         <div className="bg-gray-50 h-screen overflow-y-scroll scrollbar-hide">
           <Head>
@@ -200,29 +185,8 @@ function myProfile() {
                         </div>
                     )}
                     </div>
-                    {/* <div>
-                        <div className="mt-3 text-center sm:mt-5">
-                            <div
-                                as="h3"
-                                className="text-lg leading-6 font-medium text-gray-900"
-                            >
-                            </div>
-                            <div>
-                                <input ref={filePickerRef} type="file" hidden onChange={addImageToPost}/>
-                            </div>
-                        </div>
-                    </div> */}
+           
 
-
-                    {/* <Button type="primary" onClick={showModal}>
-                    Open Modal 
-                    </Button> */}
-                
-
-                    {/* <p>My Username: </p>
-                    <input style={{width: "250px"}} value={myUsername} onChange={(e) => setMyUsername(e.currentTarget.value)}/> */}
-                    {/* <p>My Email: </p>
-                    <input style={{width: "250px"}} value={myEmail} onChange={(e) => setMyEmail(e.currentTarget.value)}/> */}
                     <div className='basicUserInfoDiv'>
                         <p className='userName'><b>@{myUsername} </b></p>
                         <PencilIcon className="btn postButtons" onClick={showModal}/>
@@ -235,44 +199,6 @@ function myProfile() {
                     </Button>
 
 
-
-                    {/* {selectedFile ? (
-                        <img src={selectedFile} className="w-12 object-contain cursor-pointer" onClick={() => setSelectedFile(null)} alt="selected image" />
-                    ) : (
-                        <div
-                            onClick={() => filePickerRef.current.click()}
-                            className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 cursor-pointer"
-                        >
-                            <CameraIcon 
-                                className="h-6 w-6 text-red-600"
-                                aria-hidden="true"
-                            />
-                        </div>
-                    )}
-                    <div>
-                        <div className="mt-3 text-center sm:mt-5">
-                            <div
-                                as="h3"
-                                className="text-lg leading-6 font-medium text-gray-900"
-                            >
-                            </div>
-                            <div>
-                                <input ref={filePickerRef} type="file" hidden onChange={addImageToPost}/>
-                            </div>
-                        </div>
-                    </div> */}
-
-
-                    {/* <button onClick={handleSaveProfile} isLoading={isUserUpdating}>Save</button> */}
-                    {/* <button onClick={handleSaveProfile} >Save</button>
-
-                    <div>
-                        <button onClick={handleSaveProfileToChain} >Save To Chain</button>
-                    </div> */}
-
-                    {/* {userError &&
-                        <Error title="User change Failed" message={userError.message} />
-                    } */}
 
 
 

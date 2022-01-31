@@ -15,10 +15,8 @@ export default function Home() {
   const [isAvax, setIsAvax] = useState(true);
   useEffect(() => {
       if(chainId == 0xa869){ // Avalanche testnet
-          console.log("Tu pravi da je avax")
           setIsAvax(true);
       }else if(chainId == 0x61){      // BSC testnet
-          console.log("Tu pravi da je bsc")
           setIsAvax(false)
       }
   }, [chainId]);

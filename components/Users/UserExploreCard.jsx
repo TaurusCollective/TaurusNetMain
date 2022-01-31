@@ -2,7 +2,6 @@ import { Button } from "antd";
 import { useRouter } from "next/dist/client/router";
 
 function UserExploreCard({userCard}) {
-    console.log("userCard : ", userCard.attributes);
     const router = useRouter();
 
     return (

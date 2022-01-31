@@ -17,6 +17,9 @@ const FeedPosts = () => {
     function toogleShowAddPost(){
         setShowAddPost(!showAddPost);
     }
+    const sendDataToParent = (index) => { // the callback. Use a better name
+        toogleShowAddPost();
+      };
 
     if (selectedCategory["category"] === "default") {
         result = (
@@ -43,7 +46,7 @@ const FeedPosts = () => {
                     Post
                 </Button>
             </div>
-            {showAddPost ? <AddPost/>:""}
+            {showAddPost ? <AddPost showAddPost={showAddPost} sendDataToParent={sendDataToParent}/>:""}
             <Posts/>
         </div>    
         )

@@ -16,11 +16,10 @@ function Story({profileImg, img, userAddres}) {
     const { isSaving, error, save } = useNewMoralisObject('Stories');
     const { user} = useMoralis();
 
-    //const [username, setUsername] = useState("")
     const [storyOwnerUsername, setStoryOwnerUsername] = useState("");
     const [storyOwnerAvatar, setStoryOwnerAvatar] = useState("");
 
-    //console.log("userAddres : ", userAddres)
+   
 
 
     async function getStoryOwner() {
@@ -28,7 +27,6 @@ function Story({profileImg, img, userAddres}) {
             userAddres,
         });
 
-        //console.log("datadata : ", data);
 
         if(data){
             setStoryOwnerUsername(data.username)

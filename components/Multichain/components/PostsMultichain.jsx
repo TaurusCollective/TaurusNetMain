@@ -15,7 +15,7 @@ function PostsMultichain() {
       );
 
     const fetchedPosts = JSON.parse(JSON.stringify(queryPost.data, ["postId", "contentId", "postOwner", "parentId", "updatedAt", "commentList", "chain"])).reverse();
-    console.log("fetchedPosts: ",fetchedPosts);
+   
 
     const havePosts = fetchedPosts.length > 0 ? true : false;
 
